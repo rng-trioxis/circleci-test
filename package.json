@@ -20,6 +20,10 @@
     "prepublish": "babel -s inline -d lib src --ignore __tests__,test.js",
     "test": "jest"
   },
+  "jest": {
+    "setupFiles": ["./jest/setup.js"],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+  },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "prop-types": "^15.5.10",
