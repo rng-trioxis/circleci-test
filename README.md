@@ -116,3 +116,6 @@ export default compose(
   injectContent(...content, ...MyContent.content)
 )(MoreContent);
 ```
+
+## Development
+To work on the client itself, see the [development readme](./README-dev.md)
