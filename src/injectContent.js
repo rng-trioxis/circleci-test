@@ -38,23 +38,21 @@ export const injectContent = (...args)=>compose(
       variables:hocArgsToVars(props.trxCMA.website,args)
     })
   }),
-  branch(
-    props=>props.data.loading,
-    renderComponent(()=>null)
-  ),
   mapProps(props=>{
     const {
       data:{
-        content
+        content,
+        loading
       },
       ...remainingProps
     } = props;
 
     return {
       content:{
-        ...simplifyContentItems(content),
-        __raw:content
-      },  
+        ...(!loading ? simplifyContentItems(content) : {}),
+        __raw: content,
+        __loading: loading
+      },
       ...remainingProps
     }
   })

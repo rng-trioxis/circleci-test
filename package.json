@@ -17,11 +17,14 @@
   "main": "lib/index.js",
   "repository": "Trioxis/react-cafe-cms",
   "scripts": {
+    "dev": "nodemon --watch src --exec \"yarn prepublish\"",
     "prepublish": "babel -s inline -d lib src --ignore __tests__,test.js",
     "test": "jest"
   },
   "jest": {
-    "setupFiles": ["./jest/setup.js"],
+    "setupFiles": [
+      "./jest/setup.js"
+    ],
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   },
   "dependencies": {
@@ -42,6 +45,7 @@
     "enzyme-adapter-react-16": "^1.0.1",
     "jest": "^21.2.1",
     "jest-enzyme": "^4.0.0",
+    "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
