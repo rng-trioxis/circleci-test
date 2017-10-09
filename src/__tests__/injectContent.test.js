@@ -1,5 +1,4 @@
 import React from 'react';
-import {compose} from 'recompose';
 import {mount} from 'enzyme';
 
 import {injectContent} from '../injectContent';
@@ -16,7 +15,7 @@ describe('injectContent', () => {
         <WrappedComponent {...props} data={{loading: true, content: []}}/>
     )
     const fun = jest.fn(props => <div/>);
-    const Component = compose(injectContent('welcomeText'))(fun);
+    const Component = injectContent('welcomeText')(fun);
     const mountedComponent = mount(
       <Component />,
       {context: {trxCMA: {website: 'banana'}}}
@@ -54,9 +53,7 @@ describe('injectContent', () => {
         />
     );
     const fun = jest.fn(props => <div/>);
-    const Component = compose(
-      injectContent('welcome-text', "special-offer")
-    )(fun);
+    const Component = injectContent('welcome-text', "special-offer")(fun);
     const mountedComponent = mount(
       <Component />,
       {context: {trxCMA: {website: 'banana'}}}
