@@ -177,6 +177,9 @@ describe('injectContent', () => {
         {slug: "offer-expired", website: "banana"}
       ]
     )
+    expect(fun).toHaveBeenCalledWith(expect.objectContaining({
+      offerAvailable: false
+    }))
 
     spy.mockReset();
     spy.mockRestore();
