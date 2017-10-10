@@ -41,8 +41,8 @@ describe('injectContent', () => {
           }}
         />
     );
-    const fun = jest.fn(props => <div/>);
-    const Component = injectContent('welcome-text')(fun);
+    const child = jest.fn(props => <div/>);
+    const Component = injectContent('welcome-text')(child);
     const mountedComponent = mount(
       <Component />,
       {context: fixtures.context}
@@ -69,8 +69,8 @@ describe('injectContent', () => {
           }}
         />
     );
-    const fun = jest.fn(props => <div/>);
-    const Component = injectContent('welcome-text', "special-offer")(fun);
+    const child = jest.fn(props => <div/>);
+    const Component = injectContent('welcome-text', "special-offer")(child);
     const mountedComponent = mount(
       <Component />,
       {context: fixtures.context}
@@ -94,16 +94,16 @@ describe('injectContent', () => {
       (query, config) => (WrappedComponent) => (props) =>
         <WrappedComponent {...props} data={{loading: true, content: []}}/>
     )
-    const fun = jest.fn(props => <div/>);
-    const Component = injectContent('welcomeText')(fun);
+    const child = jest.fn(props => <div/>);
+    const Component = injectContent('welcomeText')(child);
     const mountedComponent = mount(
       <Component />,
       {context: fixtures.context}
     );
 
     expect(mountedComponent).toBeDefined()
-    expect(fun).toHaveBeenCalled();
-    expect(fun.mock.calls[0][0].content).toMatchObject({__loading: true});
+    expect(child).toHaveBeenCalled();
+    expect(child.mock.calls[0][0].content).toMatchObject({__loading: true});
 
     spy.mockReset();
     spy.mockRestore();
@@ -120,16 +120,16 @@ describe('injectContent', () => {
           }}
         />
     );
-    const fun = jest.fn(props => <div/>);
-    const Component = injectContent('welcome-text', "special-offer")(fun);
+    const child = jest.fn(props => <div/>);
+    const Component = injectContent('welcome-text', "special-offer")(child);
     const mountedComponent = mount(
       <Component />,
       {context: fixtures.context}
     )
 
     expect(mountedComponent).toBeDefined()
-    expect(fun).toHaveBeenCalled();
-    expect(fun.mock.calls[0][0].content).toMatchObject({
+    expect(child).toHaveBeenCalled();
+    expect(child.mock.calls[0][0].content).toMatchObject({
       __loading: false,
       "welcome-text": "Hi would you like a frozen banana",
       "special-offer": "Free single-dip banana for family members!"
@@ -153,14 +153,13 @@ describe('injectContent', () => {
         />
       }
     );
-    const fun = jest.fn(props => <div/>);
 
+    const child = jest.fn(props => <div/>);
     const slugFunc = jest.fn(props => [
       'welcome-text',
       props.offerAvailable ? 'offer-available' : 'offer-expired'
     ])
-
-    const Component = injectContent(slugFunc)(fun);
+    const Component = injectContent(slugFunc)(child);
     const mountedComponent = mount(
       <Component offerAvailable={false} />,
       {context: fixtures.context}
@@ -177,7 +176,7 @@ describe('injectContent', () => {
         {slug: "offer-expired", website: "banana"}
       ]
     )
-    expect(fun).toHaveBeenCalledWith(expect.objectContaining({
+    expect(child).toHaveBeenCalledWith(expect.objectContaining({
       offerAvailable: false
     }))
 
