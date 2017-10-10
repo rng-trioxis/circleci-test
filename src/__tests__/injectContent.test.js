@@ -138,4 +138,47 @@ describe('injectContent', () => {
     spy.mockReset();
     spy.mockRestore();
   })
+
+  it('can take a single functional argument that recieves props and returns an array of strings to query', () => {
+    const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
+      (query, config) => (WrappedComponent) => (props) => {
+        // react-apollo.graphql uses the options config object
+        config.options(props);
+        return <WrappedComponent
+          {...props}
+          data={{
+            loading: false,
+            content: [fixtures.injectedContent[0], fixtures.injectedContent[1]]
+          }}
+        />
+      }
+    );
+    const fun = jest.fn(props => <div/>);
+
+    const slugFunc = jest.fn(props => [
+      'welcome-text',
+      props.offerAvailable ? 'offer-available' : 'offer-expired'
+    ])
+
+    const Component = injectContent(slugFunc)(fun);
+    const mountedComponent = mount(
+      <Component offerAvailable={false} />,
+      {context: fixtures.context}
+    )
+
+    expect(spy).toHaveBeenCalled();
+    expect(slugFunc).toHaveBeenCalledWith(
+      expect.objectContaining({offerAvailable: false})
+    )
+    expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
+      'variables.slugs',
+      [
+        {slug: "welcome-text", website: "banana"},
+        {slug: "offer-expired", website: "banana"}
+      ]
+    )
+
+    spy.mockReset();
+    spy.mockRestore();
+  })
 })
