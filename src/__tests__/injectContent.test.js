@@ -5,6 +5,11 @@ import {injectContent} from '../injectContent';
 import * as reactApollo from 'react-apollo';
 
 const fixtures = {
+  context: {
+    trxCMA: {
+      website: 'banana'
+    }
+  },
   injectedContent: [{
     id: "d2Vic2l0ZTp3ZWxjb21lVGV4dAo=",
     __typename: "TextContent",
@@ -25,6 +30,34 @@ describe('injectContent', () => {
     expect(typeof injectContent).toBe('function')
   })
 
+  it('accepts a string argument and uses apollo graphql to get the slug', () => {
+    const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
+      (query, config) => (WrappedComponent) => (props) =>
+        <WrappedComponent
+          {...props}
+          data={{
+            loading: false,
+            content: [fixtures.injectedContent[0], fixtures.injectedContent[1]]
+          }}
+        />
+    );
+    const fun = jest.fn(props => <div/>);
+    const Component = injectContent('welcome-text')(fun);
+    const mountedComponent = mount(
+      <Component />,
+      {context: fixtures.context}
+    )
+
+    expect(spy).toHaveBeenCalled();
+    expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
+      'variables.slugs',
+      [{ slug: "welcome-text", website: "banana" }]
+    )
+
+    spy.mockReset();
+    spy.mockRestore();
+  })
+
   it('accepts any number of string arguments and uses apollo graphql to get slugs', () => {
     const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
       (query, config) => (WrappedComponent) => (props) =>
@@ -40,11 +73,11 @@ describe('injectContent', () => {
     const Component = injectContent('welcome-text', "special-offer")(fun);
     const mountedComponent = mount(
       <Component />,
-      {context: {trxCMA: {website: 'banana'}}}
+      {context: fixtures.context}
     )
 
     expect(spy).toHaveBeenCalled();
-    expect(spy.mock.calls[0][1].options({trxCMA: {website: 'banana'}})).toHaveProperty(
+    expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
       'variables.slugs',
       [
         {slug: "welcome-text", website: "banana"},
@@ -65,7 +98,7 @@ describe('injectContent', () => {
     const Component = injectContent('welcomeText')(fun);
     const mountedComponent = mount(
       <Component />,
-      {context: {trxCMA: {website: 'banana'}}}
+      {context: fixtures.context}
     );
 
     expect(mountedComponent).toBeDefined()
@@ -91,7 +124,7 @@ describe('injectContent', () => {
     const Component = injectContent('welcome-text', "special-offer")(fun);
     const mountedComponent = mount(
       <Component />,
-      {context: {trxCMA: {website: 'banana'}}}
+      {context: fixtures.context}
     )
 
     expect(mountedComponent).toBeDefined()
