@@ -27,7 +27,7 @@ describe('injectContent', () => {
 
   it('accepts any number of string arguments and uses apollo graphql to get slugs', () => {
     const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
-      (query, options) => (WrappedComponent) => (props) =>
+      (query, config) => (WrappedComponent) => (props) =>
         <WrappedComponent
           {...props}
           data={{
@@ -58,7 +58,7 @@ describe('injectContent', () => {
 
   it('injects the loading prop from react-apollo', () => {
     const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
-      (query, options) => (WrappedComponent) => (props) =>
+      (query, config) => (WrappedComponent) => (props) =>
         <WrappedComponent {...props} data={{loading: true, content: []}}/>
     )
     const fun = jest.fn(props => <div/>);
@@ -78,7 +78,7 @@ describe('injectContent', () => {
 
   it('maps returned slugs directly onto the injected content prop', () => {
     const spy = jest.spyOn(reactApollo, 'graphql').mockImplementation(
-      (query, options) => (WrappedComponent) => (props) =>
+      (query, config) => (WrappedComponent) => (props) =>
         <WrappedComponent
           {...props}
           data={{
