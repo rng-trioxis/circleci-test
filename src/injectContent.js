@@ -33,10 +33,18 @@ export const injectContent = (...args)=>compose(
   getContext({
     trxCMA:PropTypes.object.isRequired
   }),
-  graphql(contentQuery,{
-    options:props=>({
-      variables:hocArgsToVars(props.trxCMA.website,args)
-    })
+  graphql(contentQuery, {
+    options: props => {
+      if (args.length === 1 && typeof args[0] === 'function') {
+        return {
+          variables: hocArgsToVars(props.trxCMA.website, args[0](props))
+        }
+      } else {
+        return {
+          variables: hocArgsToVars(props.trxCMA.website, args)
+        }
+      }
+    }
   }),
   mapProps(props=>{
     const {

@@ -46,7 +46,7 @@ function MyApp () {
 export default MyApp;
 ```
 
-Then inject a `content` prop into your components using the higher order component:
+Then inject a `content` prop into your components using the `injectContent` higher order component:
 ```js
 // ./MyPage
 import React from 'react';
@@ -65,6 +65,55 @@ export default injectContent('helloWorld')(MyPage);
 ```
 
 The `content` prop is an object with keys corresponding to each requested slug.
+
+You can provide `injectContent` with any number of arguments for each slug you want to retrieve
+
+```js
+// ./MyPage
+import React from 'react';
+import {injectContent} from '@trioxis/react-cafe-cms';
+
+function MyPage (props) {
+  const {content} = props
+  return (
+    <div>
+      <p>{content.helloWorld}</p>
+      <p>{content.seasonalOffer}</p>
+    </div>
+  );
+}
+
+export default injectContent('helloWorld', 'seasonalOffer')(MyPage);
+```
+
+You can provide `injectContent` with a single function that recieves props and returns an array of slugs  to retrieve. Use this to dynamically figure out the slugs based on props.
+
+```js
+import React from 'react';
+import {injectContent} from '@trioxis/react-cafe-cms';
+
+function offerBox (props) {
+  const {type, content} = props;
+  return (
+    <div>
+      <h1>{content.offerTitle}</h1>
+      <p>{content[type]}</p>
+    </div>
+  )
+}
+
+const MyOffer = injectContent(
+  props => ['offerTitle', props.type]
+)(offerBox);
+
+function MyPage (props) {
+  return (
+    <MyOffer type="seasonal" />
+  );
+}
+
+export default MyPage;
+```
 
 ### Showing loading content
 Keys on `content` are only defined once a response is received from the API. You can use the `__loading` key to determine if a response is still in flight.
