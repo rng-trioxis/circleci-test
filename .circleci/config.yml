@@ -20,11 +20,11 @@ jobs:
       working_directory: ~/react-cafe-cms
       steps:
         - checkout
-      - restore_cache:
-          keys:
+        - restore_cache:
+            keys:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
-            - v1-npm-deps-{{ checksum "package.json" }}
+              - dependency-cache-{{ checksum "package.json" }}
         - run:
             name: Test
             command: yarn test
