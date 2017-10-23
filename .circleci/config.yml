@@ -20,13 +20,11 @@ jobs:
       working_directory: ~/react-cafe-cms
       steps:
         - checkout
-        - run:
-            name: Install pcakage
-            command: yarn install
-        - save_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-            paths:
-              - ~/react-cafe-cms/node_modules
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package.json checksum
+            # when this file is changed, this key will fail
+            - v1-npm-deps-{{ checksum "package.json" }}
         - run:
             name: Test
             command: yarn test
