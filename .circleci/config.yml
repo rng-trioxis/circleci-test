@@ -7,8 +7,8 @@ jobs:
      steps:
        - checkout
        - run:
-           name: Install npm pcakage
-           command: npm install
+           name: Install pcakage
+           command: yarn install
        - save_cache:
            key: dependency-cache-{{ checksum "package.json" }}
            paths:
@@ -23,9 +23,6 @@ jobs:
         - run:
             name: Test
             command: yarn test
-        - run:
-            name: Generate code coverage
-            command: './node_modules/.bin/nyc report --reporter=text-lcov'
 
 workflows:
   version: 2
