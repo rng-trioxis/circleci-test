@@ -4,7 +4,7 @@ jobs:
      docker:
        - image: circleci/node:latest
      steps:
-       - checkout
+      - checkout
       - run:
           name: Install npm pcakage
           command: npm install
@@ -22,11 +22,11 @@ jobs:
           name: Test
           command: yarn test
 
-   workflows:
-      version: 2
-      build_and_test:
-        jobs:
-          - build
-          - test:
-              requires:
-                - build
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
