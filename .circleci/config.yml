@@ -5,4 +5,18 @@ jobs:
        - image: circleci/node:latest
      steps:
        - checkout
-       - run: yarn test
+       - run:
+          name: Update package
+          command: sudo npm install -g npm@latest
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm pcakage
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: run yarn test
+          command: yarn test
