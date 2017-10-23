@@ -32,7 +32,7 @@ jobs:
             name: Save test results
             command: |
                mkdir -p ~/test-report
-               bundle exec test-report --format junit --out ~/cucumber/junit.xml
+               bundle exec test-report --format junit --out ~/test-report/junit.xml
             when: always
         - store_test_results:
             path: ~/test-report
