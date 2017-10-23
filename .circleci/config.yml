@@ -21,6 +21,13 @@ jobs:
       steps:
         - checkout
         - run:
+            name: Install pcakage
+            command: yarn install
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+            paths:
+              - ~/react-cafe-cms/node_modules
+        - run:
             name: Test
             command: yarn test
 
