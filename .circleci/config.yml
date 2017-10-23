@@ -5,4 +5,4 @@ jobs:
        - image: circleci/node:latest
      steps:
        - checkout
-       - run: echo "hello world"
+       - run: yarn test
