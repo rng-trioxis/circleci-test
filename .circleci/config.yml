@@ -3,6 +3,7 @@ jobs:
    build:
      docker:
        - image: circleci/node:latest
+     working_directory: ~/react-cafe-cms
      steps:
        - checkout
        - run:
@@ -11,19 +12,17 @@ jobs:
        - save_cache:
            key: dependency-cache-{{ checksum "package.json" }}
            paths:
-             - node_modules
+             - ~/react-cafe-cms/node_modules
 
    test:
       docker:
         - image: circleci/node:latest
+      working_directory: ~/react-cafe-cms
       steps:
         - checkout
         - run:
             name: Test
             command: yarn test
-        - store_test_results:
-            path: /tmp/test-results
-
 
 workflows:
   version: 2
