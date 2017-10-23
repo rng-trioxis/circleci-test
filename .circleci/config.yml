@@ -4,14 +4,13 @@ jobs:
      docker:
        - image: circleci/node:latest
      steps:
-      - checkout
-      - run:
-          name: Install npm pcakage
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+       - checkout
+       - run:
+           name: Install npm pcakage
+           command: npm install
+       - save_cache:
+           key: dependency-cache-{{ checksum "package.json" }}
+           paths: - node_modules
 
    test:
       docker:
@@ -19,8 +18,11 @@ jobs:
       steps:
         - checkout
         - run:
-          name: Test
-          command: yarn test
+            name: Test
+            command: yarn test
+        - store_test_results:
+            path: /tmp/test-results
+
 
 workflows:
   version: 2
