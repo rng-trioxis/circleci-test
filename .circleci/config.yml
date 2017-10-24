@@ -20,6 +20,7 @@ jobs:
       working_directory: ~/react-cafe-cms
       override:
         - mkdir -p $CIRCLE_TEST_REPORTS/reports
+        - eslint --format junit src/ > $CIRCLE_TEST_REPORTS/reports/eslint.xml
         - ava --tap | tap-xunit > $CIRCLE_TEST_REPORTS/reports/ava.xml
       steps:
         - checkout
