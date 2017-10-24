@@ -31,9 +31,9 @@ jobs:
         - run:
             name: Save test results
             command: |
-            yarn add ava tap-xunit --dev # or you could use npm
-            mkdir -p ~/reports
-            ava --tap | tap-xunit > /reports/ava.xml
+              yarn add ava tap-xunit --dev
+              mkdir -p ~/reports
+              ava --tap | tap-xunit > /reports/ava.xml
             when: always
         - store_test_results:
             path: ~/reports
