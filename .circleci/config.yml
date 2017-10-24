@@ -31,13 +31,14 @@ jobs:
         - run:
             name: Save test results
             command: |
-              mkdir -p ~/cucumber
-              bundle exec cucumber --format junit --out ~/cucumber/junit.xml
+            yarn add ava tap-xunit --dev # or you could use npm
+            mkdir -p ~/reports
+            ava --tap | tap-xunit > /reports/ava.xml
             when: always
         - store_test_results:
-            path: ~/cucumber
+            path: ~/reports
         - store_artifacts:
-            path: ~/cucumber
+            path: ~/reports
 
 
 workflows:
