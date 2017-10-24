@@ -28,8 +28,16 @@ jobs:
         - run:
             name: Test
             command: yarn test
+        - run:
+            name: Save test results
+            command: |
+              mkdir -p ~/cucumber
+              bundle exec cucumber --format junit --out ~/cucumber/junit.xml
+            when: always
         - store_test_results:
-            path: /tmp/test-results
+            path: ~/cucumber
+        - store_artifacts:
+            path: ~/cucumber
 
 
 workflows:
