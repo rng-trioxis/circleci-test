@@ -1,12 +1,5 @@
 test:
-  steps:
-    - run: mkdir test-reports
-    - store_artifacts:
-        path: test-reports/
-        destination: tr1
-    - store_test_results:
-        path: test-reports/
-
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/reports
+    - eslint --format junit src/ > $CIRCLE_TEST_REPORTS/reports/eslint.xml
     - ava --tap | tap-xunit > $CIRCLE_TEST_REPORTS/reports/ava.xml
