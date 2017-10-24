@@ -31,6 +31,7 @@ jobs:
         - run:
             name: Save test results
             command: |
+              npm install --global ava
               yarn add ava tap-xunit --dev
               mkdir -p ~/reports
               ava --tap | tap-xunit > /reports/ava.xml
