@@ -25,13 +25,15 @@ jobs:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
               - dependency-cache-1
+        - run: mkdir test-reports
         - run:
             name: Test
             command: yarn test
-      override:
-        - mocha test --reporter mocha-junit-reporter:
-            environment:
-              MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+        - store_artifacts:
+            path: test-reports/
+            destination: tr1
+        - store_test_results:
+            path: test-reports/
 
 
 workflows:
