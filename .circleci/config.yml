@@ -29,11 +29,11 @@ jobs:
             name: Save Jest test results
             command: yarn test --ci --testResultsProcessor="jest-junit"
             environment:
-              JEST_JUNIT_OUTPUT: "tmp/test-results/jest.xml"
+              JEST_JUNIT_OUTPUT: "reports/test-results/jest-junit.xml"
         - store_test_results:
-            path: tmp/test-results
+            path: reports/test-results
         - store_artifacts:
-            path: tmp/test-results
+            path: reports/test-results
 
 
 workflows:
