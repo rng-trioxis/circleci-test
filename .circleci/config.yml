@@ -34,8 +34,7 @@ jobs:
               sudo yarn global add ava
               yarn add ava tap-xunit --dev
               mkdir -p ~/reports
-              touch ~/reports/ava.xml
-              ava --tap | tap-xunit > /reports/ava.xml
+              ava --tap | tap-xunit > ~/reports/ava.xml
             when: always
         - store_test_results:
             path: ~/reports
