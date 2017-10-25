@@ -32,7 +32,7 @@ jobs:
             name: Save test results
             command: |
               sudo yarn global add ava
-              yarn add ava tap-xunit --dev
+              sudo yarn global add ava tap-xunit --dev
               mkdir -p ~/reports
               ava --tap | tap-xunit > ~/reports/ava.xml
             when: always
