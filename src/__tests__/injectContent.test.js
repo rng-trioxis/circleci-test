@@ -77,7 +77,7 @@ describe('injectContent', () => {
     )
 
     expect(spy).toHaveBeenCalled();
-    expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
+    expect(spy.mock.calls[2][1].options(fixtures.context)).toHaveProperty(
       'variables.slugs',
       [
         {slug: "welcome-text", website: "banana"},

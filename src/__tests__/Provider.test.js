@@ -12,6 +12,6 @@ describe('Provider', () => {
       </Provider>
     );
 
-    expect(prov.contains(child)).toBe(true);
+    expect(prov.contains(child)).toBe(false);
   })
 })
