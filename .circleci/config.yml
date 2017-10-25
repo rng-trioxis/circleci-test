@@ -26,21 +26,17 @@ jobs:
             # when this file is changed, this key will fail
               - dependency-cache-{{ checksum "yarn.lock" }}
         - run:
-            name: Test
-            command: yarn test
-        - run:
             name: Save Jest test results
             command: |
               mkdir -p ~/reports/junit
-              touch ~/reports/junit/js-test-results.xml
-              sudo yarn jest tests --ci --testResultsProcessor="jest-junit"
+              yarn test --ci --testResultsProcessor="jest-junit"
             environment:
-              JEST_JUNIT_OUTPUT: "./reports/junit/js-test-results.xml"
+              JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
             when: always
         - store_test_results:
-            path: ~/reports
+            path: ~/reports/junit
         - store_artifacts:
-            path: ~/reports
+            path: ~/reports/junit
 
 
 workflows:
