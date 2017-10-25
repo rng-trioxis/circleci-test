@@ -31,9 +31,10 @@ jobs:
         - run:
             name: Save Jest test results
             command: |
+              mkdir -p ~/reports/junit
               yarn jest tests --ci --testResultsProcessor="jest-junit"
             environment:
-              JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+              JEST_JUNIT_OUTPUT: "~/reports/junit/js-test-results.xml"
             when: always
         - store_test_results:
             path: ~/reports
