@@ -65,7 +65,7 @@ describe('injectContent', () => {
           {...props}
           data={{
             loading: false,
-            content: [fixtures.injectedContent[2], fixtures.injectedContent[1]]
+            content: [fixtures.injectedContent[0], fixtures.injectedContent[1]]
           }}
         />
     );
@@ -77,7 +77,7 @@ describe('injectContent', () => {
     )
 
     expect(spy).toHaveBeenCalled();
-    expect(spy.mock.calls[2][1].options(fixtures.context)).toHaveProperty(
+    expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
       'variables.slugs',
       [
         {slug: "welcome-text", website: "banana"},
@@ -167,7 +167,7 @@ describe('injectContent', () => {
 
     expect(spy).toHaveBeenCalled();
     expect(slugFunc).toHaveBeenCalledWith(
-      expect.objectContaining({offerAvailable: false})
+      expect.objectContaining({offerAvailable: true})
     )
     expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
       'variables.slugs',
