@@ -65,7 +65,7 @@ describe('injectContent', () => {
           {...props}
           data={{
             loading: false,
-            content: [fixtures.injectedContent[0], fixtures.injectedContent[1]]
+            content: [fixtures.injectedContent[2], fixtures.injectedContent[1]]
           }}
         />
     );
