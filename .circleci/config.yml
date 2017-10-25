@@ -31,7 +31,7 @@ jobs:
         - run:
             name: Save Jest test results
             command: |
-              sudo yarn add jest -g 
+              sudo yarn global add jest
               yarn jest tests --ci --testResultsProcessor="jest-junit"
             environment:
               JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
