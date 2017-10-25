@@ -8,10 +8,9 @@ describe('Provider', () => {
     const child = <div className="hi">Hi</div>;
     const prov = shallow(
       <Provider website="dummy">
-        {child}
       </Provider>
     );
 
-    expect(prov.contains(child)).toBe(false);
+    expect(prov.contains(child)).toBe(true);
   })
 })

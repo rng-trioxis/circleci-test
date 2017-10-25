@@ -167,7 +167,7 @@ describe('injectContent', () => {
 
     expect(spy).toHaveBeenCalled();
     expect(slugFunc).toHaveBeenCalledWith(
-      expect.objectContaining({offerAvailable: true})
+      expect.objectContaining({offerAvailable: false})
     )
     expect(spy.mock.calls[0][1].options(fixtures.context)).toHaveProperty(
       'variables.slugs',
