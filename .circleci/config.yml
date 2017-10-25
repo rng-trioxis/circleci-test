@@ -29,12 +29,11 @@ jobs:
             name: Test
             command: yarn test
         - run:
-            name: Save test results
+            name: Save Jest test results
             command: |
-              sudo yarn global add ava
-              sudo yarn global add ava tap-xunit --dev
-              mkdir -p ~/reports
-              ava --tap | tap-xunit > ~/reports/ava.xml
+              yarn jest tests --ci --testResultsProcessor="jest-junit"
+            environment:
+              JEST_JUNIT_OUTPUT: "~/reports/junit/js-test-results.xml"
             when: always
         - store_test_results:
             path: ~/reports
