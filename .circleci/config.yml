@@ -30,7 +30,6 @@ jobs:
             command: yarn test --ci --testResultsProcessor="jest-junit"
             environment:
               JEST_JUNIT_OUTPUT: "$CIRCLE_TEST_REPORTS/junit/js-test-results.xml"
-            when: always
         - store_test_results:
             path: $CIRCLE_TEST_REPORTS/junit
         - store_artifacts:
