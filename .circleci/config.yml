@@ -15,8 +15,6 @@ jobs:
              - ~/react-cafe-cms
 
    test:
-      docker:
-        - image: circleci/node:latest
       working_directory: ~/react-cafe-cms
       steps:
         - checkout
