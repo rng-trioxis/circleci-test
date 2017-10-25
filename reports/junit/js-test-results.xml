@@ -1,0 +1,20 @@
+<testsuites name="jest tests">
+  <testsuite name="injectContent" tests="6" errors="0" failures="0" skipped="0" timestamp="2017-10-25T03:33:08" time="0.315">
+    <testcase classname="injectContent is a function" name="injectContent is a function" time="0.007">
+    </testcase>
+    <testcase classname="injectContent accepts a string argument and uses apollo graphql to get the slug" name="injectContent accepts a string argument and uses apollo graphql to get the slug" time="0.024">
+    </testcase>
+    <testcase classname="injectContent accepts any number of string arguments and uses apollo graphql to get slugs" name="injectContent accepts any number of string arguments and uses apollo graphql to get slugs" time="0.004">
+    </testcase>
+    <testcase classname="injectContent injects the loading prop from react-apollo" name="injectContent injects the loading prop from react-apollo" time="0.003">
+    </testcase>
+    <testcase classname="injectContent maps returned slugs directly onto the injected content prop" name="injectContent maps returned slugs directly onto the injected content prop" time="0.003">
+    </testcase>
+    <testcase classname="injectContent can take a single functional argument that recieves props and returns an array of strings to query" name="injectContent can take a single functional argument that recieves props and returns an array of strings to query" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Provider" tests="1" errors="0" failures="0" skipped="0" timestamp="2017-10-25T03:33:08" time="0.097">
+    <testcase classname="Provider renders children" name="Provider renders children" time="0.007">
+    </testcase>
+  </testsuite>
+</testsuites>
